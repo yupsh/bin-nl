@@ -84,12 +84,20 @@ func newApp(version string, stdin io.Reader, stdout io.Writer, fs afero.Fs) *cli
 		// os.Exit, so the exit code stays testable.
 		ExitErrHandler: func(context.Context, *cli.Command, error) {},
 		Flags: []cli.Flag{
-			&cli.StringFlag{Name: flagBody, Aliases: []string{"b"}, Usage: "use STYLE for numbering body lines (a=all, t=non-empty, n=none)"},
+			&cli.StringFlag{
+				Name:    flagBody,
+				Aliases: []string{"b"},
+				Usage:   "use STYLE for numbering body lines (a=all, t=non-empty, n=none)",
+			},
 			&cli.StringFlag{Name: flagSep, Aliases: []string{"s"}, Usage: "add STRING after (possible) line number"},
 			&cli.IntFlag{Name: flagStart, Aliases: []string{"v"}, Usage: "first line number for each section"},
 			&cli.IntFlag{Name: flagIncrement, Aliases: []string{"i"}, Usage: "line number increment at each line"},
 			&cli.IntFlag{Name: flagWidth, Aliases: []string{"w"}, Usage: "use NUMBER columns for line numbers"},
-			&cli.StringFlag{Name: flagFormat, Aliases: []string{"n"}, Usage: "insert line numbers according to FORMAT (ln, rn, rz)"},
+			&cli.StringFlag{
+				Name:    flagFormat,
+				Aliases: []string{"n"},
+				Usage:   "insert line numbers according to FORMAT (ln, rn, rz)",
+			},
 		},
 		Action: action(stdin, stdout, fs),
 	}
